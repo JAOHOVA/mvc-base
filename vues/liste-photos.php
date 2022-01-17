@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Mon book</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-<header>
-    <h1>Mon book</h1>
-</header>
-<section>
-    <nav>
-        <ul>
-            <li><a href="/">Accueil</a></li>
-        </ul>
-    </nav>
+<?php
+$titre = 'Mon book';
+ob_start();
+?>
     <article>
         <?php foreach ($photos as $photo): ?>
-            <img src="photos/<?= $photo->fichier ?>" width="250" />
+            <a href="photo.php?id=<?= $photo->id ?>">
+                <img src="photos/<?= $photo->fichier ?>" width="250" />
+            </a>
             <h2><?= $photo->titre ?></h2>
         <?php endforeach; ?>
     </article>
-</section>
-<footer>
-    <p>Mon book - Tous droits réservés</p>
-</footer>
-</body>
-</html>
+<?php
+$contenu = ob_get_clean();
+require_once('layout.php');

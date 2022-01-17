@@ -2,16 +2,7 @@
 
 class Photos
 {
-    private $pdo = null;
-
-    public function __construct()
-    {
-        try {
-            $this->pdo = new PDO('mysql:host=localhost;dbname=book;charset=utf8', 'root', 'root');
-        } catch (PDOException $e) {
-            exit('Erreur : '.$e->getMessage());
-        }
-    }
+    use Modele;
 
     public function listerPhotos()
     {
@@ -19,7 +10,7 @@ class Photos
             $stmt = $this->pdo->query('SELECT * FROM photo');
         }
         $photos = [];
-        while ($photo = $stmt->fetchObject()) {
+        while ($photo = $stmt->fetchObject('Photo')) {
             $photos[] = $photo;
         }
 
